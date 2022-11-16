@@ -1,14 +1,14 @@
 import { Label, Input } from './Filter.styled';
 import PropTypes from 'prop-types';
 
-function Filter(props) {
+function Filter({ onChange }) {
   return (
     <Label>
       Find contacts by name:
       <Input
         type="text"
         name="name"
-        onChange={e => props.onChange(e.currentTarget.value)}
+        onChange={e => onChange(e.currentTarget.value)}
       />
     </Label>
   );

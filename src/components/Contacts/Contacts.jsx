@@ -16,7 +16,7 @@ function ContactList(props) {
             <TextStyle>
               {obj.name}: {obj.number}
             </TextStyle>
-            <ButtonStyle type="button" onClick={() => props.onDelete(obj.name)}>
+            <ButtonStyle type="button" onClick={() => props.onDelete(obj.id)}>
               Delete
             </ButtonStyle>
           </ContactsItemStyled>
