@@ -5,23 +5,37 @@ import ContactList from './Contacts/Contacts';
 import { FormInput } from './Form/Form';
 import Filter from './Filter/Filter';
 
-import { deleteContact } from '../redux/contactsSlice';
-import { getContacts, getFilter } from '../redux/selectors';
+// import { deleteContact } from '../redux/contactsSlice';
+import {
+  selectContacts,
+  selectFilter,
+  selectFilterContacts,
+} from '../redux/selectors';
+import { useEffect } from 'react';
+import { fetchContacts } from 'redux/operations';
 
 export function App() {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
-  const filter = useSelector(getFilter);
+  const contacts = useSelector(selectContacts);
+  // const filterContacts = useSelector(selectFilterContacts);
+  const filter = useSelector(selectFilter);
 
-  const handleDelete = id => {
-    dispatch(deleteContact(id));
-  };
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
-  const fromFilter = useMemo(() => {
-    return contacts.filter(({ name }) =>
-      name.toLowerCase().includes(filter.toLowerCase())
-    );
-  }, [contacts, filter]);
+  // const handleDelete = id => {
+  //   dispatch(deleteContact(id));
+  // };
+
+  // const fromFilter = useMemo(() => {
+  //   console.log('contacts from memo', contacts);
+  //   return contacts.filter(contact => {
+  //     console.log('name', contact.name);
+  //     return contact;
+  //     // return name.toLowerCase().includes(filter.toLowerCase());
+  //   });
+  // }, [contacts]);
 
   return (
     <section style={{ marginLeft: '40px' }}>
@@ -29,9 +43,8 @@ export function App() {
       <FormInput />
       <h2>Contacts</h2>
       <Filter />
-      {fromFilter && (
-        <ContactList allContacts={fromFilter} onDelete={handleDelete} />
-      )}
+      {/* //* <ContactList allContacts={fromFilter} onDelete={handleDelete} /> */}
+      <ContactList />
     </section>
   );
 }

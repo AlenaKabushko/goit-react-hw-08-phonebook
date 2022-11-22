@@ -1,4 +1,4 @@
-import { getContacts } from '../../redux/selectors';
+import { selectContacts } from '../../redux/selectors';
 import { addContact } from '../../redux/contactsSlice';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 
@@ -10,7 +10,7 @@ import { Formik } from 'formik';
 
 export function FormInput() {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
 
   const handleSubmit = (values, { resetForm }) => {
     const id = 'id-' + nanoid(4);
@@ -21,7 +21,7 @@ export function FormInput() {
       return false;
     }
 
-    dispatch(addContact({ id, name, number }));
+    // dispatch(addContact({ id, name, number }));
     resetForm();
   };
 
