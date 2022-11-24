@@ -1,10 +1,7 @@
 import { selectContacts } from '../../redux/selectors';
 import { addContacts } from '../../redux/operations';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
-
 import { FormStyle, LabelStyle, InputStyle, ButtonStyle } from './Form.styled';
-
-import { nanoid } from 'nanoid';
 import { Notify } from 'notiflix';
 import { Formik } from 'formik';
 
@@ -13,7 +10,6 @@ export function FormInput() {
   const contacts = useSelector(selectContacts);
 
   const handleSubmit = (values, { resetForm }) => {
-    const id = 'id-' + nanoid(4);
     const { name, number } = values;
     const contactInfo = {
       name,
@@ -22,7 +18,7 @@ export function FormInput() {
 
     if (contacts.find(contact => contact.name === name)) {
       Notify.warning(`${name} is already in contacts`);
-      return false;
+      return;
     }
 
     dispatch(addContacts(contactInfo));
