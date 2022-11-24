@@ -10,13 +10,15 @@ import {
   selectContacts,
   selectFilter,
   selectFilterContacts,
+  selectIsLoading,
 } from '../redux/selectors';
 import { useEffect } from 'react';
-import { fetchContacts } from 'redux/operations';
+import { fetchContacts, deleteContacts } from 'redux/operations';
 
 export function App() {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
+  const isLoading = useSelector(selectIsLoading);
   // const filterContacts = useSelector(selectFilterContacts);
   const filter = useSelector(selectFilter);
 
@@ -24,9 +26,10 @@ export function App() {
     dispatch(fetchContacts());
   }, [dispatch]);
 
-  // const handleDelete = id => {
-  //   dispatch(deleteContact(id));
-  // };
+  const handleDelete = ({ id }) => {
+    dispatch(deleteContacts(id));
+    console.log('new contacts', contacts);
+  };
 
   // const fromFilter = useMemo(() => {
   //   console.log('contacts from memo', contacts);
@@ -43,8 +46,9 @@ export function App() {
       <FormInput />
       <h2>Contacts</h2>
       <Filter />
+      {isLoading && <p>Loading...</p>}
       {/* //* <ContactList allContacts={fromFilter} onDelete={handleDelete} /> */}
-      <ContactList />
+      <ContactList onDelete={handleDelete} />
     </section>
   );
 }

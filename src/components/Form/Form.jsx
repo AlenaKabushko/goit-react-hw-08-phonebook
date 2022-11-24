@@ -1,5 +1,5 @@
 import { selectContacts } from '../../redux/selectors';
-import { addContact } from '../../redux/contactsSlice';
+import { addContacts } from '../../redux/operations';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 
 import { FormStyle, LabelStyle, InputStyle, ButtonStyle } from './Form.styled';
@@ -15,13 +15,17 @@ export function FormInput() {
   const handleSubmit = (values, { resetForm }) => {
     const id = 'id-' + nanoid(4);
     const { name, number } = values;
+    const contactInfo = {
+      name,
+      number,
+    };
 
     if (contacts.find(contact => contact.name === name)) {
       Notify.warning(`${name} is already in contacts`);
       return false;
     }
 
-    // dispatch(addContact({ id, name, number }));
+    dispatch(addContacts(contactInfo));
     resetForm();
   };
 

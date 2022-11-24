@@ -22,9 +22,9 @@ function ContactList({ onDelete }) {
         {contacts.map(({ id, name, phone }) => (
           <ContactsItemStyled key={nanoid(4)}>
             <TextStyle>
-              {name}: {phone}
+              {id} - {name}: {phone}
             </TextStyle>
-            <ButtonStyle type="button" onClick={() => onDelete(id)}>
+            <ButtonStyle type="button" onClick={() => onDelete({ id })}>
               Delete
             </ButtonStyle>
           </ContactsItemStyled>
