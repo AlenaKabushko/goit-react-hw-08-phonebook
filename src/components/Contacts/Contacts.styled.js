@@ -1,26 +1,26 @@
 import styled from 'styled-components';
 
 export const ContactsListStyled = styled.ul`
-display: flex;
-flex-direction: column;
-gap: 5px;
-margin: 15px 0 0 0;
-padding: 0;
-width: 500px;
-list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 15px 0 0 0;
+    padding: 0;
+    width: 500px;
+    list-style: none;
 `
 
 export const ContactsItemStyled = styled.li`
-display: flex;
-justify-content: space-between;
-align-items: center;
-gap: 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 35px;
 `
 
 export const TextStyle = styled.p`
-margin: 0;
+    margin: 0;
     font-size: 20px;
-    `
+`
 
 export const ButtonStyle = styled.button`
     font-size: 14px;
